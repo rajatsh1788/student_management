@@ -31,17 +31,17 @@ function Login() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
+  <div className="container mt-5">
+    <h2 className="text-center mb-4">🌙 Login</h2>
 
-      <input name="email" placeholder="Email" className="form-control mb-2" onChange={handleChange} />
-      <input name="password" type="password" placeholder="Password" className="form-control mb-2" onChange={handleChange} />
+    <input name="email" placeholder="Email" className="form-control mb-3" onChange={handleChange} />
+    <input name="password" type="password" placeholder="Password" className="form-control mb-3" onChange={handleChange} />
 
-      <button className="btn btn-success" onClick={handleLogin}>
-        Login
-      </button>
-    </div>
-  );
+    <button className="btn btn-success" onClick={handleLogin}>
+      Login
+    </button>
+  </div>
+);
 }
 
 export default Login;

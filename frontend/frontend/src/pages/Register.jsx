@@ -28,20 +28,20 @@ function Register() {
     }
   };
 
-  return (
-    <div className="container mt-5">
-      <h2>Register</h2>
+ return (
+  <div className="container mt-5">
+    <h2 className="text-center mb-4">🌙 Register</h2>
 
-      <input name="name" placeholder="Name" className="form-control mb-2" onChange={handleChange} />
-      <input name="email" placeholder="Email" className="form-control mb-2" onChange={handleChange} />
-      <input name="password" type="password" placeholder="Password" className="form-control mb-2" onChange={handleChange} />
-      <input name="course" placeholder="Course" className="form-control mb-2" onChange={handleChange} />
+    <input name="name" placeholder="Name" className="form-control mb-3" onChange={handleChange} />
+    <input name="email" placeholder="Email" className="form-control mb-3" onChange={handleChange} />
+    <input name="password" type="password" placeholder="Password" className="form-control mb-3" onChange={handleChange} />
+    <input name="course" placeholder="Course" className="form-control mb-3" onChange={handleChange} />
 
-      <button className="btn btn-primary" onClick={handleSubmit}>
-        Register
-      </button>
-    </div>
-  );
+    <button className="btn btn-primary" onClick={handleSubmit}>
+      Register
+    </button>
+  </div>
+);
 }
 
 export default Register;
