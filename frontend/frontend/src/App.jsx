@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <Router>
+    <Router>   {/* ✅ MUST WRAP EVERYTHING */}
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
