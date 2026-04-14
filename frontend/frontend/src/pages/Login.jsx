@@ -16,7 +16,8 @@ function Login() {
       localStorage.setItem("student", JSON.stringify(res.data.student));
 
       alert("Login Successful");
-      window.location.href = "/dashboard";
+      const navigate = useNavigate();
+navigate("/dashboard");
     } catch (err) {
       console.log(err);
       alert(err.response?.data?.msg || "Login failed");

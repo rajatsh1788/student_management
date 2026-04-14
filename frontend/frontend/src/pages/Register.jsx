@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../utils/api";
-
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -17,7 +17,11 @@ function Register() {
     try {
       const res = await API.post("/register", form);
       alert(res.data.msg || "Registered Successfully");
-      window.location.href = "/login";
+
+const navigate = useNavigate();
+
+// inside function
+navigate("/login");
     } catch (err) {
       console.log(err);
       alert(err.response?.data?.msg || "Something went wrong");

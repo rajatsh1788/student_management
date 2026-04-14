@@ -36,10 +36,12 @@ function Dashboard() {
 
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    const navigate = useNavigate();
+navigate("/login");
   };
 
-  if (!token) window.location.href = "/login";
+  if (!token) { const navigate = useNavigate();
+navigate("/login");}
 
   return (
     <div className="container mt-5">
