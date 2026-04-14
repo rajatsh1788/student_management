@@ -30,14 +30,14 @@ function Login() {
     }
   };
 
-  return (
+ return (
   <div className="container mt-5">
-    <h2 className="text-center mb-4">🌙 Login</h2>
+    <h2 className="text-center">🌙 Login</h2>
 
-    <input name="email" placeholder="Email" className="form-control mb-3" onChange={handleChange} />
-    <input name="password" type="password" placeholder="Password" className="form-control mb-3" onChange={handleChange} />
+    <input name="email" placeholder="Email" className="form-control" onChange={handleChange} />
+    <input name="password" type="password" placeholder="Password" className="form-control" onChange={handleChange} />
 
-    <button className="btn btn-success" onClick={handleLogin}>
+    <button className="btn btn-success w-100" onClick={handleLogin}>
       Login
     </button>
   </div>

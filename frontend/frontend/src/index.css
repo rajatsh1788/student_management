@@ -40,3 +40,28 @@ button {
 .btn-success:hover {
   opacity: 0.9;
 }
+/* Increase spacing */
+.form-control {
+  margin-bottom: 15px !important;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* Bigger buttons */
+.btn {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Add extra gap for headings */
+h2 {
+  margin-bottom: 25px;
+}
+
+/* Optional: container spacing */
+.container {
+  padding: 35px;
+}
