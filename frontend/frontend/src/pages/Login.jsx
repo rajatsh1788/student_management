@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 
 function Login() {
-  const [data, setData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  });
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -16,8 +22,8 @@ function Login() {
       localStorage.setItem("student", JSON.stringify(res.data.student));
 
       alert("Login Successful");
-      const navigate = useNavigate();
-navigate("/dashboard");
+
+      navigate("/dashboard"); // ✅ FIXED
     } catch (err) {
       console.log(err);
       alert(err.response?.data?.msg || "Login failed");
@@ -28,8 +34,8 @@ navigate("/dashboard");
     <div className="container mt-5">
       <h2>Login</h2>
 
-      <input name="email" className="form-control mb-2" placeholder="Email" onChange={handleChange} />
-      <input name="password" type="password" className="form-control mb-2" placeholder="Password" onChange={handleChange} />
+      <input name="email" placeholder="Email" className="form-control mb-2" onChange={handleChange} />
+      <input name="password" type="password" placeholder="Password" className="form-control mb-2" onChange={handleChange} />
 
       <button className="btn btn-success" onClick={handleLogin}>
         Login

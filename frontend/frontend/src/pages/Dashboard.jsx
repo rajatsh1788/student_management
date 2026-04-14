@@ -1,81 +1,94 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 
 function Dashboard() {
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   const student = JSON.parse(localStorage.getItem("student"));
 
-  const [course, setCourse] = useState("");
-  const [password, setPassword] = useState({
-    oldPassword: "",
-    newPassword: ""
-  });
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [course, setCourse] = useState(student?.course || "");
 
-  const config = {
-    headers: { Authorization: token }
-  };
-
+  // 🔐 Update Password
   const updatePassword = async () => {
     try {
-      await API.put("/update-password", password, config);
-      alert("Password Updated");
+      await API.put("/update-password", {
+        oldPassword,
+        newPassword
+      });
+
+      alert("Password updated");
     } catch (err) {
-      alert(err.response?.data?.msg);
+      alert(err.response?.data?.msg || "Error updating password");
     }
   };
 
+  // 📚 Update Course
   const updateCourse = async () => {
     try {
-      const res = await API.put("/update-course", { course }, config);
+      const res = await API.put("/update-course", { course });
+
       localStorage.setItem("student", JSON.stringify(res.data));
-      alert("Course Updated");
-    } catch {
-      alert("Error");
+      alert("Course updated");
+    } catch (err) {
+      alert(err.response?.data?.msg || "Error updating course");
     }
   };
 
+  // 🚪 Logout
   const logout = () => {
-    localStorage.clear();
-    const navigate = useNavigate();
-navigate("/login");
-  };
+    localStorage.removeItem("token");
+    localStorage.removeItem("student");
 
-  if (!token) { const navigate = useNavigate();
-navigate("/login");}
+    navigate("/login"); // ✅ FIXED
+  };
 
   return (
     <div className="container mt-5">
-      <div className="card p-4">
-        <h2 className="text-center">Dashboard</h2>
+      <h2>Dashboard</h2>
 
-        <div className="mt-3">
-          <p><b>Name:</b> {student?.name}</p>
-          <p><b>Email:</b> {student?.email}</p>
-          <p><b>Course:</b> {student?.course}</p>
-        </div>
+      <p><b>Name:</b> {student?.name}</p>
+      <p><b>Email:</b> {student?.email}</p>
+      <p><b>Course:</b> {student?.course}</p>
 
-        <hr />
+      <hr />
 
-        <h4>Update Password</h4>
-        <input className="form-control mb-2" placeholder="Old Password"
-          onChange={(e) => setPassword({ ...password, oldPassword: e.target.value })} />
-        <input className="form-control mb-2" placeholder="New Password"
-          onChange={(e) => setPassword({ ...password, newPassword: e.target.value })} />
-        <button className="btn btn-warning mb-3" onClick={updatePassword}>
-          Update Password
-        </button>
+      <h4>Update Password</h4>
+      <input
+        type="password"
+        placeholder="Old Password"
+        className="form-control mb-2"
+        onChange={(e) => setOldPassword(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="New Password"
+        className="form-control mb-2"
+        onChange={(e) => setNewPassword(e.target.value)}
+      />
+      <button className="btn btn-warning" onClick={updatePassword}>
+        Update Password
+      </button>
 
-        <h4>Change Course</h4>
-        <input className="form-control mb-2" placeholder="New Course"
-          onChange={(e) => setCourse(e.target.value)} />
-        <button className="btn btn-info mb-3" onClick={updateCourse}>
-          Update Course
-        </button>
+      <hr />
 
-        <button className="btn btn-danger w-100" onClick={logout}>
-          Logout
-        </button>
-      </div>
+      <h4>Update Course</h4>
+      <input
+        value={course}
+        className="form-control mb-2"
+        onChange={(e) => setCourse(e.target.value)}
+      />
+      <button className="btn btn-info" onClick={updateCourse}>
+        Update Course
+      </button>
+
+      <hr />
+
+      <button className="btn btn-danger" onClick={logout}>
+        Logout
+      </button>
     </div>
   );
 }

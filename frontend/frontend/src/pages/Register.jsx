@@ -1,7 +1,10 @@
 import { useState } from "react";
-import API from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import API from "../utils/api";
+
 function Register() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,10 +21,7 @@ function Register() {
       const res = await API.post("/register", form);
       alert(res.data.msg || "Registered Successfully");
 
-const navigate = useNavigate();
-
-// inside function
-navigate("/login");
+      navigate("/login"); // ✅ FIXED
     } catch (err) {
       console.log(err);
       alert(err.response?.data?.msg || "Something went wrong");
@@ -32,10 +32,10 @@ navigate("/login");
     <div className="container mt-5">
       <h2>Register</h2>
 
-      <input name="name" className="form-control mb-2" placeholder="Name" onChange={handleChange} />
-      <input name="email" className="form-control mb-2" placeholder="Email" onChange={handleChange} />
-      <input name="password" type="password" className="form-control mb-2" placeholder="Password" onChange={handleChange} />
-      <input name="course" className="form-control mb-2" placeholder="Course" onChange={handleChange} />
+      <input name="name" placeholder="Name" className="form-control mb-2" onChange={handleChange} />
+      <input name="email" placeholder="Email" className="form-control mb-2" onChange={handleChange} />
+      <input name="password" type="password" placeholder="Password" className="form-control mb-2" onChange={handleChange} />
+      <input name="course" placeholder="Course" className="form-control mb-2" onChange={handleChange} />
 
       <button className="btn btn-primary" onClick={handleSubmit}>
         Register
